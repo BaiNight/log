@@ -2,9 +2,11 @@
 日志流量统计
 
 安装docker
+
     sudo wget -qO- https://get.docker.com/ | sh
 		
 安装influxdb
+
     docker pull influxdb
     
     docker run --name my_influxdb influxdb
