@@ -3,6 +3,7 @@ package monitor
 import (
 	"encoding/json"
 	"io"
+	"logpro/defs"
 	"logpro/process"
 	"net/http"
 	"time"
@@ -24,21 +25,14 @@ type SystemInfo struct {
 	ErrNum       int     `json:"errNum"`       //错误数
 }
 
-var TypeMonitorChan = make(chan int, 200)
-
-const (
-	TypeHandleLine = 0
-	TypeErrNum     = 1
-)
-
 func (m *Monitor) Start(lp *proc.LogProcess) {
 
 	go func() {
-		for n := range TypeMonitorChan {
+		for n := range defs.TypeMonitorChan {
 			switch n {
-			case TypeErrNum:
+			case defs.TypeErrNum:
 				m.Data.ErrNum += 1
-			case TypeHandleLine:
+			case defs.TypeHandleLine:
 				m.Data.HandleLine += 1
 			}
 		}

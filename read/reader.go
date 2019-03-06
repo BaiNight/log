@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"io"
+	"logpro/defs"
 	"os"
 	"time"
 )
@@ -39,5 +40,7 @@ func (r *FromFile) Read(rc chan<- []byte) {
 		}
 
 		rc <- line
+
+		defs.TypeMonitorChan <- defs.TypeHandleLine
 	}
 }

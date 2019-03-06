@@ -33,6 +33,8 @@ func (lp *LogProcess) Process() {
 	for v := range lp.RC {
 		ret := r.FindStringSubmatch(string(v))
 		if len(ret) != 14 {
+			defs.TypeMonitorChan <- defs.TypeErrNum
+
 			log.Println("FindStringSubmatch fail: ", string(v))
 			continue
 		}
@@ -40,6 +42,8 @@ func (lp *LogProcess) Process() {
 		msg := &defs.Message{}
 		t, err := time.ParseInLocation("02/Jan/2006:15:04:05 +0000", ret[4], loc)
 		if err != nil {
+			defs.TypeMonitorChan <- defs.TypeErrNum
+
 			log.Println("ParseInLocation fail: ", err.Error(), ret[4])
 			continue
 		}
@@ -49,6 +53,8 @@ func (lp *LogProcess) Process() {
 
 		reqSlice := strings.Split(ret[6], " ")
 		if len(reqSlice) != 3 {
+			defs.TypeMonitorChan <- defs.TypeErrNum
+
 			log.Println("strings split fail: ", ret[6])
 			continue
 		}

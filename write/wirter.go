@@ -66,6 +66,6 @@ func (w *ToInfluxDb) Write(wc <-chan *defs.Message) {
 			log.Fatal(err)
 		}
 
-		//log.Println("write successfully")
+		log.Println("write successfully")
 	}
 }
